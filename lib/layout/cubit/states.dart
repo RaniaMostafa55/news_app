@@ -8,6 +8,10 @@ class NewsGetBusinessLoadingState extends NewsStates {}
 
 class NewsGetBusinessSuccessState extends NewsStates {}
 
+class NewsSelectBusinessItemState extends NewsStates {}
+
+class NewsSetDesktopState extends NewsStates {}
+
 class NewsGetBusinessErrorState extends NewsStates {
   final String error;
 

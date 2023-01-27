@@ -14,6 +14,10 @@ import 'shared/cubit/states.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
+  // if (Platform.isWindows) {
+  //   await DesktopWindow.setMinWindowSize(const Size(350.0, 650.0));
+  // }
+
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
   bool isDark = CacheHelper.getBool(key: "isDark");
@@ -39,76 +43,87 @@ class MyApp extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'News App',
-              theme: ThemeData(
-                  primarySwatch: Colors.deepOrange,
-                  scaffoldBackgroundColor: Colors.white,
-                  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-                    type: BottomNavigationBarType.fixed,
-                    elevation: 20,
-                    unselectedItemColor: Colors.grey,
-                    selectedItemColor: Colors.deepOrange,
-                    backgroundColor: Colors.white,
-                  ),
-                  appBarTheme: const AppBarTheme(
-                    titleSpacing: 20,
-                    iconTheme: IconThemeData(color: Colors.black),
-                    titleTextStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                    color: Colors.white,
-                    elevation: 0.0,
-                    systemOverlayStyle: SystemUiOverlayStyle(
-                        statusBarColor: Colors.white,
-                        statusBarIconBrightness: Brightness.dark),
-                  ),
-                  floatingActionButtonTheme:
-                      const FloatingActionButtonThemeData(
-                          backgroundColor: Colors.deepOrange),
-                  textTheme: const TextTheme(
-                      bodyText1: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black))),
-              darkTheme: ThemeData(
-                  primarySwatch: Colors.deepOrange,
-                  scaffoldBackgroundColor: HexColor('333739'),
-                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                    type: BottomNavigationBarType.fixed,
-                    elevation: 20,
-                    unselectedItemColor: Colors.grey,
-                    selectedItemColor: Colors.deepOrange,
-                    backgroundColor: HexColor('333739'),
-                  ),
-                  appBarTheme: AppBarTheme(
-                    titleSpacing: 20,
-                    iconTheme: const IconThemeData(color: Colors.white),
-                    titleTextStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                    color: HexColor('333739'),
-                    elevation: 0.0,
-                    systemOverlayStyle: SystemUiOverlayStyle(
-                        statusBarColor: HexColor('333739'),
-                        statusBarIconBrightness: Brightness.light),
-                  ),
-                  floatingActionButtonTheme:
-                      const FloatingActionButtonThemeData(
-                          backgroundColor: Colors.deepOrange),
-                  textTheme: const TextTheme(
-                      bodyText1: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white))),
-              themeMode: (AppCubit.get(context).isDark)
-                  ? ThemeMode.dark
-                  : ThemeMode.light,
-              home: const Directionality(
-                  textDirection: TextDirection.rtl, child: NewsLayout()),
-            );
+                debugShowCheckedModeBanner: false,
+                title: 'News App',
+                theme: ThemeData(
+                    primarySwatch: Colors.deepOrange,
+                    scaffoldBackgroundColor: Colors.white,
+                    bottomNavigationBarTheme:
+                        const BottomNavigationBarThemeData(
+                      type: BottomNavigationBarType.fixed,
+                      elevation: 20,
+                      unselectedItemColor: Colors.grey,
+                      selectedItemColor: Colors.deepOrange,
+                      backgroundColor: Colors.white,
+                    ),
+                    appBarTheme: const AppBarTheme(
+                      titleSpacing: 20,
+                      iconTheme: IconThemeData(color: Colors.black),
+                      titleTextStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      elevation: 0.0,
+                      systemOverlayStyle: SystemUiOverlayStyle(
+                          statusBarColor: Colors.white,
+                          statusBarIconBrightness: Brightness.dark),
+                    ),
+                    floatingActionButtonTheme:
+                        const FloatingActionButtonThemeData(
+                            backgroundColor: Colors.deepOrange),
+                    textTheme: const TextTheme(
+                        bodyText1: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black))),
+                darkTheme: ThemeData(
+                    primarySwatch: Colors.deepOrange,
+                    scaffoldBackgroundColor: HexColor('333739'),
+                    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                      type: BottomNavigationBarType.fixed,
+                      elevation: 20,
+                      unselectedItemColor: Colors.grey,
+                      selectedItemColor: Colors.deepOrange,
+                      backgroundColor: HexColor('333739'),
+                    ),
+                    appBarTheme: AppBarTheme(
+                      titleSpacing: 20,
+                      iconTheme: const IconThemeData(color: Colors.white),
+                      titleTextStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                      color: HexColor('333739'),
+                      elevation: 0.0,
+                      systemOverlayStyle: SystemUiOverlayStyle(
+                          statusBarColor: HexColor('333739'),
+                          statusBarIconBrightness: Brightness.light),
+                    ),
+                    floatingActionButtonTheme:
+                        const FloatingActionButtonThemeData(
+                            backgroundColor: Colors.deepOrange),
+                    textTheme: const TextTheme(
+                        bodyText1: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white))),
+                themeMode: (AppCubit.get(context).isDark)
+                    ? ThemeMode.dark
+                    : ThemeMode.light,
+                home: const Directionality(
+                    textDirection: TextDirection.rtl, child: NewsLayout())
+                // ScreenTypeLayout(
+                //   breakpoints: const ScreenBreakpoints(
+                //       desktop: 600, tablet: 300, watch: 300),
+                //   mobile: const Directionality(
+                //       textDirection: TextDirection.rtl, child: NewsLayout()),
+                //   desktop: const Text(
+                //     "Desktop",
+                //     style: TextStyle(fontSize: 50),
+                //   ),
+                // ),
+                );
           },
         ));
   }
